@@ -1,6 +1,6 @@
 ﻿namespace CryptoConverter.App
 {
-    public class Class1
+    public class CryptoApiCaller
     {
 
     }
