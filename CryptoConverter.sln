@@ -4,6 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverterUi", "CryptoConverterUi\CryptoConverterUi.csproj", "{9839FBDC-C000-4557-8C95-D53FAD14A8FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3714DCE9-62FA-4274-9B71-FDB875156B8D} = {3714DCE9-62FA-4274-9B71-FDB875156B8D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverter.App", "CryptoConverter.App\CryptoConverter.App.csproj", "{3714DCE9-62FA-4274-9B71-FDB875156B8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5410E374-B811-4AA4-9AA2-4DA88A6359F8} = {5410E374-B811-4AA4-9AA2-4DA88A6359F8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverter.Data", "CryptoConverter.Data\CryptoConverter.Data.csproj", "{5410E374-B811-4AA4-9AA2-4DA88A6359F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,14 @@ Global
 		{9839FBDC-C000-4557-8C95-D53FAD14A8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9839FBDC-C000-4557-8C95-D53FAD14A8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9839FBDC-C000-4557-8C95-D53FAD14A8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3714DCE9-62FA-4274-9B71-FDB875156B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3714DCE9-62FA-4274-9B71-FDB875156B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3714DCE9-62FA-4274-9B71-FDB875156B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3714DCE9-62FA-4274-9B71-FDB875156B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5410E374-B811-4AA4-9AA2-4DA88A6359F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5410E374-B811-4AA4-9AA2-4DA88A6359F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5410E374-B811-4AA4-9AA2-4DA88A6359F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5410E374-B811-4AA4-9AA2-4DA88A6359F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
