@@ -1,35 +1,35 @@
 ﻿namespace CryptoConverter.Data.Models
 {
-    internal class ApiModel
+    public class ApiModel
     {
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<CryptoRoot>(myJsonResponse);
         public class CryptoRoot
         {
-            public string? id { get; set; }
-            public string? name { get; set; }
-            public int? year_established { get; set; }
-            public string? country { get; set; }
-            public string? description { get; set; }
-            public string? url { get; set; }
-            public string? image { get; set; }
-            public bool? has_trading_incentive { get; set; }
-            public int? trust_score { get; set; }
-            public int? trust_score_rank { get; set; }
-            public double? trade_volume_24h_btc { get; set; }
-            public double? trade_volume_24h_btc_normalized { get; set; }
+            public string? Id { get; set; }
+            public string? Name { get; set; }
+            public int? Year_established { get; set; }
+            public string? Country { get; set; }
+            public string? Description { get; set; }
+            public string? Url { get; set; }
+            public string? Symbol { get; set; }
+            public bool? Has_trading_incentive { get; set; }
+            public int? Trust_score { get; set; }
+            public int? Trust_score_rank { get; set; }
+            public double? Trade_volume_24h_btc { get; set; }
+            public double? Trade_volume_24h_btc_normalized { get; set; }
             public PriceRoot? Price { get; set; }
         }
 
 
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-        public class Price
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<PriceRoot>(myJsonResponse);
+        public class PriceModel
         {
-            public double? sek { get; set; }
+            public decimal Sek { get; set; }
         }
 
         public class PriceRoot
         {
-            public Price? gate { get; set; }
+            public PriceModel? Price { get; set; }
         }
 
     }
