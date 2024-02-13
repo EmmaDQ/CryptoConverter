@@ -1,8 +1,10 @@
-﻿using CryptoConverter.Data.Models;
+﻿using CryptoConverter.App.Manager;
+using CryptoConverter.Data.Models;
 using Newtonsoft.Json;
 using static CryptoConverter.Data.Models.ApiModel;
 
-namespace CryptoConverter.App
+
+namespace CryptoConverter.App.ApiCaller
 {
     public class CryptoApiCaller
     {
@@ -13,19 +15,23 @@ namespace CryptoConverter.App
             //Get first (or random) 10 cryptos
 
             HttpClient clientCrypto = new HttpClient();
-            clientCrypto.BaseAddress = new Uri("https://api.coingecko.com/api/v3/exchanges?per_page=1&page=1");
+            clientCrypto.BaseAddress = new Uri("https://api.coingecko.com/api/v3/exchanges/");
 
-            HttpResponseMessage responseCrypto = await clientCrypto.GetAsync(id);
+            HttpResponseMessage responseCrypto = await clientCrypto.GetAsync(id.ToLower());
 
             if (responseCrypto.IsSuccessStatusCode)
             {
                 string cryptoJson = await responseCrypto.Content.ReadAsStringAsync();
 
-                CryptoRoot cryptoRoot = JsonConvert.DeserializeObject<CryptoRoot>(cryptoJson;
+                CryptoRoot cryptoRoot = JsonConvert.DeserializeObject<CryptoRoot>(cryptoJson);
 
                 if (cryptoRoot != null)
                 {
-                    CryptoModel cryptoDbModel = new CryptoModel().ApiModelToDbModel(cryptoRoot);
+                    CryptoManager manager = new CryptoManager();
+
+                    CryptoModel cryptoDbModel = new CryptoModel();
+                    cryptoDbModel = manager.ApiModelToDbModel(cryptoRoot);
+
                     return cryptoDbModel;
                 }
 
@@ -33,21 +39,22 @@ namespace CryptoConverter.App
 
             }
 
-
+            throw new HttpRequestException();
         }
 
-        public async Task<decimal>? GetPriceFromId(string id)
+        public async Task<PriceModel> GetPriceFromId(string id)
         {
             HttpClient clientPrice = new HttpClient();
-            clientPrice.BaseAddress = new Uri("https://api.coingecko.com/api/v3/simple/price?ids=gate&vs_currencies=sek");
+            clientPrice.BaseAddress = new Uri("https://api.coingecko.com/api/v3/simple/");
 
-            HttpResponseMessage responsePrice = await clientPrice.GetAsync(id);
+            string getPrice = $"price?ids={id}&vs_currencies=sek";
+            HttpResponseMessage responsePrice = await clientPrice.GetAsync(getPrice.ToLower());
 
             if (responsePrice.IsSuccessStatusCode)
             {
                 string priceJson = await responsePrice.Content.ReadAsStringAsync();
 
-                PriceRoot? priceRoot = JsonConvert.DeserializeObject<CryptoRoot>(priceJson;
+                PriceRoot? priceRoot = JsonConvert.DeserializeObject<PriceRoot>(priceJson);
                 PriceModel priceModel = new PriceModel()
                 {
                     Sek = priceRoot.Price.Sek,
@@ -55,9 +62,9 @@ namespace CryptoConverter.App
 
                 if (priceRoot != null)
                 {
-                    decimal price = priceModel.Sek;
+                    priceModel.Sek = priceRoot.Price.Sek;
 
-                    return price;
+                    return priceModel;
                 }
 
                 throw new JsonException();
