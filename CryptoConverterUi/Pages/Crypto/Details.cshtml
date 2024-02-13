@@ -2,3 +2,32 @@
 @model CryptoConverterUi.Pages.Crypto.DetailsModel
 @{
 }
+
+@if (Model.Crypto != null)
+{
+    <div class="container">
+        <header>
+            <h1 class="crypto-header">@Model.Crypto.Symbol</h1>
+        </header>
+        <section class="market-details">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="market-cap">
+                        <h4>Market Cap Rank: @Model.Crypto.MarketCapRank</h4>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="price">
+                        <h5>Price in SEK: @Model.Crypto.Price kr</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+else
+{
+    <h1>Crypto info not found!</h1>
+}
+
+

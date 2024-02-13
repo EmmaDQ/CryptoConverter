@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+using CryptoConverter.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CryptoConverterUi.Pages
@@ -7,7 +7,6 @@ namespace CryptoConverterUi.Pages
     {
         public void OnGet()
         {
-
         }
     }
 }
