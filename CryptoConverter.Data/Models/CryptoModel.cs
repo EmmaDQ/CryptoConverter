@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static CryptoConverter.Data.Models.ApiModel;
 
 namespace CryptoConverter.Data.Models
 {
@@ -11,6 +12,6 @@ namespace CryptoConverter.Data.Models
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal Price { get; set; }
+        public PriceModel Price { get; set; }
     }
 }

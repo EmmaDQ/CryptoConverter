@@ -1,13 +1,14 @@
-﻿using CryptoConverter.Data.Models;
+﻿using CryptoConverter.App.ApiCaller;
+using CryptoConverter.Data.Models;
 using static CryptoConverter.Data.Models.ApiModel;
 
-namespace CryptoConverter.App
+namespace CryptoConverter.App.Manager
 {
     public class CryptoManager
     {
         public CryptoModel ApiModelToDbModel(CryptoRoot cRoot)
         {
-
+            CryptoApiCaller caller = new CryptoApiCaller();
 
 
             CryptoModel cryptoModel = new CryptoModel()
@@ -16,7 +17,7 @@ namespace CryptoConverter.App
                 Symbol = cRoot.Symbol,
                 Name = cRoot.Name,
                 Description = cRoot.Description,
-                Price = GetPriceFromId(cRoot.Id)
+                Price = caller.GetPriceFromId(cRoot.Id).Result
             };
 
 
