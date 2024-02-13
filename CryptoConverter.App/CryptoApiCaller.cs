@@ -21,7 +21,7 @@ namespace CryptoConverter.App
             {
                 string cryptoJson = await responseCrypto.Content.ReadAsStringAsync();
 
-                CryptoRoot cryptoRoot = JsonConvert.DeserializeObject<CryptoRoot>(cryptoJson;
+                CryptoRoot cryptoRoot = JsonConvert.DeserializeObject<CryptoRoot>(cryptoJson);
 
                 if (cryptoRoot != null)
                 {

@@ -1,14 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CryptoConverterUi.Pages
+namespace CryptoConverterUi.Pages.Crypto
 {
-    public class IndexModel : PageModel
+    public class homeModel : PageModel
     {
-
         public void OnGet()
         {
-
         }
     }
 }

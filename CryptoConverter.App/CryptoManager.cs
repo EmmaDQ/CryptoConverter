@@ -3,7 +3,7 @@ using static CryptoConverter.Data.Models.ApiModel;
 
 namespace CryptoConverter.App
 {
-    internal class CryptoManager
+    public class CryptoManager
     {
         public CryptoModel ApiModelToDbModel(CryptoRoot cRoot)
         {
