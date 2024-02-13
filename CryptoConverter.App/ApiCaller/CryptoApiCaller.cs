@@ -1,10 +1,9 @@
-﻿using CryptoConverter.App.Manager;
-using CryptoConverter.Data.Models;
+﻿using CryptoConverter.Data.Models;
+using CryptoConverterApp.Manager;
 using Newtonsoft.Json;
-using static CryptoConverter.Data.Models.ApiModel;
 
 
-namespace CryptoConverter.App.ApiCaller
+namespace CryptoConverterApp.ApiCaller
 {
     public class CryptoApiCaller
     {

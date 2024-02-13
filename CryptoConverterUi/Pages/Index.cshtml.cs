@@ -1,20 +1,26 @@
-using Microsoft.AspNetCore.Mvc;
+using CryptoConverter.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CryptoConverterUi.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public CryptoModel crypto { get; set; }
+        private List<string> cryptos { get; set; } = new List<string>()
         {
-            _logger = logger;
-        }
+            "bitcoin",
+            "ethereum",
+            "tether",
+            "ripple",
+            "solana"
+        };
+
 
         public void OnGet()
         {
+            CryptoApiCaller caller = new();
 
+            crypto = caller.GetCrypto();
         }
     }
 }

@@ -1,4 +1,4 @@
-using CryptoConverter.Data.Database;
+using CryptoConverterData.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

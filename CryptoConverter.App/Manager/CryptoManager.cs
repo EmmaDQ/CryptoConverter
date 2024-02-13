@@ -1,8 +1,7 @@
-﻿using CryptoConverter.App.ApiCaller;
-using CryptoConverter.Data.Models;
-using static CryptoConverter.Data.Models.ApiModel;
+﻿using CryptoConverter.Data.Models;
+using CryptoConverterApp.ApiCaller;
 
-namespace CryptoConverter.App.Manager
+namespace CryptoConverterApp.Manager
 {
     public class CryptoManager
     {
@@ -17,12 +16,28 @@ namespace CryptoConverter.App.Manager
                 Symbol = cRoot.Symbol,
                 Name = cRoot.Name,
                 Description = cRoot.Description,
-                Price = caller.GetPriceFromId(cRoot.Id).Result
+                Price = ApiModelToDbModel(caller.GetPriceFromId(cRoot.Id).Result)
             };
 
 
 
             return cryptoModel;
+        }
+
+        public PriceDbModel ApiModelToDbModel(PriceModel price)
+        {
+            if (price != null)
+            {
+                PriceDbModel priceDb = new PriceDbModel()
+                {
+                    Price = price.Sek
+                };
+
+                return priceDb;
+            }
+
+            throw new HttpRequestException();
+
         }
     }
 }

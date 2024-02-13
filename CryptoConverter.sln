@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverterUi", "CryptoConverterUi\CryptoConverterUi.csproj", "{9839FBDC-C000-4557-8C95-D53FAD14A8FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoConverterUi", "CryptoConverterUi\CryptoConverterUi.csproj", "{9839FBDC-C000-4557-8C95-D53FAD14A8FE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3714DCE9-62FA-4274-9B71-FDB875156B8D} = {3714DCE9-62FA-4274-9B71-FDB875156B8D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverter.App", "CryptoConverter.App\CryptoConverter.App.csproj", "{3714DCE9-62FA-4274-9B71-FDB875156B8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoConverter.App", "CryptoConverter.App\CryptoConverter.App.csproj", "{3714DCE9-62FA-4274-9B71-FDB875156B8D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5410E374-B811-4AA4-9AA2-4DA88A6359F8} = {5410E374-B811-4AA4-9AA2-4DA88A6359F8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConverter.Data", "CryptoConverter.Data\CryptoConverter.Data.csproj", "{5410E374-B811-4AA4-9AA2-4DA88A6359F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoConverter.Data", "CryptoConverter.Data\CryptoConverter.Data.csproj", "{5410E374-B811-4AA4-9AA2-4DA88A6359F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
