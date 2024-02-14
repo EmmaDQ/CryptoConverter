@@ -1,78 +1,71 @@
-﻿using CryptoConverter.Data.Models;
-using CryptoConverterApp.Manager;
+﻿using CryptoConverter.Data.Database.Repositories;
+using CryptoConverter.Data.Models;
+using CryptoConverterData.Database;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static CryptoConverter.Data.Models.ApiModel;
 
 
 namespace CryptoConverterApp.ApiCaller
 {
     public class CryptoApiCaller
     {
-        //länk
+        private readonly HttpClient _httpClient;
+        private readonly AppDbContext _dbContext;
 
-        public async Task<CryptoModel> GetCrypto(string id)
+        public CryptoApiCaller(AppDbContext dbContext)
         {
-            //Get first (or random) 10 cryptos
+            _dbContext = dbContext;
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://api.coingecko.com/api/v3/");
 
-            HttpClient clientCrypto = new HttpClient();
-            clientCrypto.BaseAddress = new Uri("https://api.coingecko.com/api/v3/exchanges/");
-
-            HttpResponseMessage responseCrypto = await clientCrypto.GetAsync(id.ToLower());
-
-            if (responseCrypto.IsSuccessStatusCode)
-            {
-                string cryptoJson = await responseCrypto.Content.ReadAsStringAsync();
-
-                CryptoRoot cryptoRoot = JsonConvert.DeserializeObject<CryptoRoot>(cryptoJson);
-
-                if (cryptoRoot != null)
-                {
-                    CryptoManager manager = new CryptoManager();
-
-                    CryptoModel cryptoDbModel = new CryptoModel();
-                    cryptoDbModel = manager.ApiModelToDbModel(cryptoRoot);
-
-                    return cryptoDbModel;
-                }
-
-                throw new JsonException();
-
-            }
-
-            throw new HttpRequestException();
         }
 
-        public async Task<PriceModel> GetPriceFromId(string id)
+        public async Task<Root> MakeCall(string id)
         {
-            HttpClient clientPrice = new HttpClient();
-            clientPrice.BaseAddress = new Uri("https://api.coingecko.com/api/v3/simple/");
-
-            string getPrice = $"price?ids={id}&vs_currencies=sek";
-            HttpResponseMessage responsePrice = await clientPrice.GetAsync(getPrice.ToLower());
-
-            if (responsePrice.IsSuccessStatusCode)
+            try
             {
-                string priceJson = await responsePrice.Content.ReadAsStringAsync();
 
-                PriceRoot? priceRoot = JsonConvert.DeserializeObject<PriceRoot>(priceJson);
-                PriceModel priceModel = new PriceModel()
+                HttpResponseMessage responseCrypto = await _httpClient.GetAsync($"https://api.coingecko.com/api/v3/coins/{id.ToLower()}");
+                HttpResponseMessage responsePrice = await _httpClient.GetAsync($"https://api.coingecko.com/api/v3/simple/price?ids={id.ToLower()}&vs_currencies=sek");
+
+                if (responseCrypto.IsSuccessStatusCode)
                 {
-                    Sek = priceRoot.Price.Sek,
-                };
+                    string jsonCrypto = await responseCrypto.Content.ReadAsStringAsync();
+                    string jsonPrice = await responsePrice.Content.ReadAsStringAsync();
+                    Root? resultCrypto = JsonConvert.DeserializeObject<Root>(jsonCrypto);
+                    PriceRoot? resultPrice = JsonConvert.DeserializeObject<PriceRoot>(jsonPrice);
 
-                if (priceRoot != null)
-                {
-                    priceModel.Sek = priceRoot.Price.Sek;
+                    if (resultCrypto != null && resultPrice != null && resultPrice.Prices.ContainsKey(id))
+                    {
 
-                    return priceModel;
+
+                        CryptoModel crypto = new()
+                        {
+                            cryptoAPI_Id = id,
+                            Symbol = resultCrypto.Symbol,
+                            Name = resultCrypto.Name,
+                            MarketCapRank = resultCrypto.MarketCapRank,
+                            Price = resultPrice.Prices[id]["sek"].Value<int?>()
+
+                        };
+
+                        CryptoRepository cryptoRepo = new(_dbContext);
+                        await cryptoRepo.Add(crypto);
+                        await cryptoRepo.SaveChanges();
+
+                    }
+
+                    return resultCrypto;
                 }
-
-                throw new JsonException();
+            }
+            catch
+            {
 
             }
 
 
             throw new HttpRequestException();
-
         }
     }
 }

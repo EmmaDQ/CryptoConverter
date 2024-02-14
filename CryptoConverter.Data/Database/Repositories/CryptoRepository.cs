@@ -26,7 +26,7 @@ namespace CryptoConverter.Data.Database.Repositories
 
         public async Task<CryptoModel?> GetById(string currencyId)
         {
-            CryptoModel? crypto = await _dbContext.Cryptos.FirstOrDefaultAsync(c => c.Id == currencyId);
+            CryptoModel? crypto = await _dbContext.Cryptos.FirstOrDefaultAsync(c => c.cryptoAPI_Id == currencyId);
 
             if (crypto != null)
             {
