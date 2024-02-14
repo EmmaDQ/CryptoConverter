@@ -23,18 +23,18 @@ namespace CryptoConverter.Data.Models
         }
 
 
-		// Root myDeserializedClass = JsonConvert.DeserializeObject<PriceRoot>(myJsonResponse);
-		public class PriceRoot
-		{
-			[JsonExtensionData]
-			public Dictionary<string, JToken> Prices { get; set; }
-		}
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<PriceRoot>(myJsonResponse);
+        public class PriceRoot
+        {
+            [JsonExtensionData]
+            public Dictionary<string, JToken> Prices { get; set; }
+        }
 
-		public class PriceModel
-		{
-			public PriceRoot CryptoPrices { get; set; }
-		}
-	}
+        public class PriceModel
+        {
+            public PriceRoot CryptoPrices { get; set; }
+        }
+    }
 }
 
 

@@ -7,6 +7,7 @@ namespace CryptoConverterUi.Pages
     {
         public void OnGet()
         {
+
         }
     }
 }

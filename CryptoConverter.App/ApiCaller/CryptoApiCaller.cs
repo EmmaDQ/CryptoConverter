@@ -1,13 +1,12 @@
-﻿using CryptoConverter.Data.Database;
-using CryptoConverter.Data.Database.Repositories;
+﻿using CryptoConverter.Data.Database.Repositories;
 using CryptoConverter.Data.Models;
-using Microsoft.EntityFrameworkCore;
+using CryptoConverterData.Database;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static CryptoConverter.Data.Models.ApiModel;
 
 
-namespace CryptoConverter.App.ApiCaller
+namespace CryptoConverterApp.ApiCaller
 {
     public class CryptoApiCaller
     {
@@ -19,7 +18,7 @@ namespace CryptoConverter.App.ApiCaller
             _dbContext = dbContext;
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("https://api.coingecko.com/api/v3/");
-            
+
         }
 
         public async Task<Root> MakeCall(string id)
@@ -27,7 +26,7 @@ namespace CryptoConverter.App.ApiCaller
             try
             {
 
-                HttpResponseMessage responseCrypto = await _httpClient.GetAsync($"https://api.coingecko.com/api/v3//coins/{id.ToLower()}");
+                HttpResponseMessage responseCrypto = await _httpClient.GetAsync($"https://api.coingecko.com/api/v3/coins/{id.ToLower()}");
                 HttpResponseMessage responsePrice = await _httpClient.GetAsync($"https://api.coingecko.com/api/v3/simple/price?ids={id.ToLower()}&vs_currencies=sek");
 
                 if (responseCrypto.IsSuccessStatusCode)
@@ -62,11 +61,11 @@ namespace CryptoConverter.App.ApiCaller
             }
             catch
             {
-				
-			}
+
+            }
 
 
-			throw new HttpRequestException();
+            throw new HttpRequestException();
         }
     }
 }

@@ -1,8 +1,7 @@
-using CryptoConverter.App.ApiCaller;
-using CryptoConverter.Data.Database;
 using CryptoConverter.Data.Database.Repositories;
 using CryptoConverter.Data.Models;
-using Microsoft.AspNetCore.Mvc;
+using CryptoConverterApp.ApiCaller;
+using CryptoConverterData.Database;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CryptoConverterUi.Pages.Crypto
@@ -30,7 +29,7 @@ namespace CryptoConverterUi.Pages.Crypto
                 await cryptoApiCaller.MakeCall(id.ToLower());
             }
 
-			Crypto = await cryptoRepo.GetById(id.ToLower());
+            Crypto = await cryptoRepo.GetById(id.ToLower());
         }
     }
 }

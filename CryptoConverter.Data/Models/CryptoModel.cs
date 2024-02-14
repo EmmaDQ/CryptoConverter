@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static CryptoConverter.Data.Models.ApiModel;
 
 namespace CryptoConverter.Data.Models
 {
